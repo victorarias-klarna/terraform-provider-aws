@@ -294,6 +294,12 @@ func resourceAwsCognitoUserPool() *schema.Resource {
 							Type:     schema.TypeBool,
 							Optional: true,
 						},
+						"temporary_password_validity_days": {
+							Type:         schema.TypeInt,
+							Optional:     true,
+							Default:      7,
+							ValidateFunc: validation.IntBetween(0, 90),
+						},
 					},
 				},
 			},
