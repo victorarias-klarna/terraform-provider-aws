@@ -2525,8 +2525,6 @@ func expandCognitoUserPoolAdminCreateUserConfig(config map[string]interface{}) *
 		}
 	}
 
-	configs.UnusedAccountValidityDays = aws.Int64(int64(config["unused_account_validity_days"].(int)))
-
 	return configs
 }
 
@@ -2560,8 +2558,6 @@ func flattenCognitoUserPoolAdminCreateUserConfig(s *cognitoidentityprovider.Admi
 			config["invite_message_template"] = []map[string]interface{}{subconfig}
 		}
 	}
-
-	config["unused_account_validity_days"] = *s.UnusedAccountValidityDays
 
 	return []map[string]interface{}{config}
 }
@@ -2722,7 +2718,7 @@ func expandCognitoUserPoolPasswordPolicy(config map[string]interface{}) *cognito
 	}
 
 	if v, ok := config["temporary_password_validity_days"]; ok {
-		configs.MinimumLength = aws.Int64(int64(v.(int)))
+		configs.TemporaryPasswordValidityDays = aws.Int64(int64(v.(int)))
 	}
 
 	return configs
